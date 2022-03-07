@@ -11,5 +11,9 @@
   "license": "MIT",
   "bin": {
     "create-stackbit-app": "./index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "chalk": "^5.0.0"
   }
 }
