@@ -50,11 +50,6 @@ Run the following commands:
 
   cd ${projectName}
   npm run dev
-
-When your dev server boots, you'll see an ${chalk.bgYellow.black.bold(
-    " app.stackbit.com "
-  )} URL in the logs.
-Open this URL in your browser and start building!
   `);
 }
 
