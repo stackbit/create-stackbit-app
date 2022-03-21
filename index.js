@@ -46,10 +46,9 @@ async function cloneStarter() {
   console.log(`
 🎉 ${chalk.bold("Welcome to Stackbit!")} 🎉
 
-Run the following commands:
+Follow the instructions for getting Started here:
 
-  cd ${projectName}
-  npm run dev
+    https://github.com/stackbit/nextjs-starter#getting-started
   `);
 }
 
