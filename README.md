@@ -17,7 +17,7 @@ To see a full list of options use the `--help` flag:
 
 Options:
       --version  Show version number                                   [boolean]
-  -s, --starter  Choose a starter           [choices: "nextjs", "ts-mui-nextjs"]
+  -s, --starter  Choose a starter           [choices: "nextjs", "ts-nextjs"]
       --help     Show help                                             [boolean]
 ```
 
@@ -26,7 +26,7 @@ Options:
 Use the `--starter` option for specifying a starter. Run the command with the `--help` flag to see a full list of available starters.
 
 ```txt
-npx create-stackbit-app --starter ts-mui-nextjs
+npx create-stackbit-app --starter ts-nextjs
 ```
 
 If no starter option is provided, [the default starter](https://github.com/stackbit-themes/nextjs-starter) is used.

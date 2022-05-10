@@ -4,7 +4,7 @@ const starters = [
     repoUrl: "https://github.com/stackbit-themes/nextjs-starter",
   },
   {
-    name: "ts-mui-nextjs",
+    name: "ts-nextjs",
     repoUrl: "https://github.com/stackbit-themes/ts-mui-nextjs-starter",
   },
 ];
