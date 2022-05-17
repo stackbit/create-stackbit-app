@@ -95,20 +95,27 @@ async function cloneExample() {
   const tmpDir = `examples-sparse-${timestamp}`;
   console.log(`\nCreating new project in ${dirName} ...`);
 
-  // Sparse clone the monorepo.
-  await run(
-    `git clone --depth 1 --filter=blob:none --sparse ${config.examples.repoUrl} ${tmpDir}`
-  );
-  // Checkout just the example dir.
-  await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`);
-  // Copy out into a new directory within current working directory.
-  await run(`cp -R ${tmpDir}/${args.example} ${dirName}`);
-  // Delete the clone.
-  await run(`rm -rf ${tmpDir}`);
+  try {
+    // Sparse clone the monorepo.
+    await run(
+      `git clone --depth 1 --filter=blob:none --sparse ${config.examples.repoUrl} ${tmpDir}`
+    );
+    // Checkout just the example dir.
+    await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`);
+    // Copy out into a new directory within current working directory.
+    await run(`cp -R ${tmpDir}/${args.example} ${dirName}`);
+    // Delete the clone.
+    await run(`rm -rf ${tmpDir}`);
 
-  // Project Setup
-  await installDependencies();
-  await initGit();
+    // Project Setup
+    await installDependencies();
+    await initGit();
+  } catch (err) {
+    console.error(err);
+    if (fs.existsSync(dirName)) await run(`rm -rf ${dirName}`);
+    if (fs.existsSync(tmpDir)) await run(`rm -rf ${tmpDir}`);
+    process.exit(1);
+  }
 
   // Output next steps:
   console.log(`
