@@ -26,6 +26,12 @@ function prompt(question, defaultAnswer) {
   });
 }
 
+function getDirName(defaultDirName) {
+  let dirName = args._[0] ?? defaultDirName;
+  if (fs.existsSync(dirName)) dirName += `-${timestamp}`;
+  return dirName;
+}
+
 async function installDependencies(dirName) {
   console.log(`Installing dependencies ...`);
   await run(`cd ${dirName} && npm install`);
@@ -68,7 +74,7 @@ const timestamp = Math.round(new Date().getTime() / 1000);
 
 async function cloneStarter() {
   // Set references
-  const dirName = args._[0] ?? `${config.defaults.dirName}-${timestamp}`;
+  const dirName = getDirName(config.defaults.dirName);
 
   // Clone repo
   const cloneCommand = `git clone --depth=1 ${starter.repoUrl} ${dirName}`;
@@ -92,7 +98,7 @@ Follow the instructions for getting Started here:
 /* --- New Project from Example --- */
 
 async function cloneExample() {
-  const dirName = args._[0] ?? `${args.example}-${timestamp}`;
+  const dirName = getDirName(args.example);
   const tmpDir = `__tmp${timestamp}__`;
   console.log(`\nCreating new project in ${dirName} ...`);
 
