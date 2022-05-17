@@ -3,7 +3,6 @@
 import chalk from "chalk";
 import { exec } from "child_process";
 import fs from "fs";
-import { nanoid } from "nanoid";
 import path from "path";
 import readline from "readline";
 import util from "util";
@@ -62,10 +61,10 @@ const starter = config.starters.find(
   (s) => s.name === (args.starter ?? config.defaults.starter.name)
 );
 
-const timestamp = new Date().getTime();
+// Current time in seconds.
+const timestamp = Math.round(new Date().getTime() / 1000);
 
-const dirName =
-  args._[0] ?? `${config.defaults.dirName}-${nanoid(8).toLowerCase()}`;
+const dirName = args._[0] ?? `${config.defaults.dirName}-${timestamp}`;
 
 /* --- New Project from Starter --- */
 
