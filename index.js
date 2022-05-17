@@ -27,6 +27,19 @@ function prompt(question, defaultAnswer) {
   });
 }
 
+async function installDependencies() {
+  console.log(`Installing dependencies ...`);
+  await run(`cd ${dirName} && npm install`);
+}
+
+async function initGit() {
+  console.log(`Setting up Git ...`);
+  await run(`rm -rf ${dirName}/.git`);
+  await run(
+    `cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`
+  );
+}
+
 /* --- Parse CLI Arguments */
 
 const args = yargs(hideBin(process.argv))
@@ -34,6 +47,11 @@ const args = yargs(hideBin(process.argv))
     alias: "s",
     describe: "Choose a starter",
     choices: config.starters.map((s) => s.name),
+  })
+  .option("example", {
+    alias: "e",
+    describe: "Start from an example",
+    choices: config.examples.directories,
   })
   .help()
   .parse();
@@ -43,10 +61,13 @@ const args = yargs(hideBin(process.argv))
 const starter = config.starters.find(
   (s) => s.name === (args.starter ?? config.defaults.starter.name)
 );
+
+const timestamp = new Date().getTime();
+
 const dirName =
   args._[0] ?? `${config.defaults.dirName}-${nanoid(8).toLowerCase()}`;
 
-/* --- New Project --- */
+/* --- New Project from Starter --- */
 
 async function cloneStarter() {
   // Clone repo
@@ -54,16 +75,9 @@ async function cloneStarter() {
   console.log(`\nCreating new project in ${dirName} ...`);
   await run(cloneCommand);
 
-  // Install dependencies
-  console.log(`Installing dependencies ...`);
-  await run(`cd ${dirName} && npm install`);
-
-  // Set up git
-  console.log(`Setting up Git ...`);
-  await run(`rm -rf ${dirName}/.git`);
-  await run(
-    `cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`
-  );
+  // Project Setup
+  await installDependencies();
+  await initGit();
 
   // Output next steps:
   console.log(`
@@ -72,6 +86,37 @@ async function cloneStarter() {
 Follow the instructions for getting Started here:
 
     ${starter.repoUrl}#readme
+  `);
+}
+
+/* --- New Project from Example --- */
+
+async function cloneExample() {
+  const tmpDir = `examples-sparse-${timestamp}`;
+  console.log(`\nCreating new project in ${dirName} ...`);
+
+  // Sparse clone the monorepo.
+  await run(
+    `git clone --depth 1 --filter=blob:none --sparse ${config.examples.repoUrl} ${tmpDir}`
+  );
+  // Checkout just the example dir.
+  await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`);
+  // Copy out into a new directory within current working directory.
+  await run(`cp -R ${tmpDir}/${args.example} ${dirName}`);
+  // Delete the clone.
+  await run(`rm -rf ${tmpDir}`);
+
+  // Project Setup
+  await installDependencies();
+  await initGit();
+
+  // Output next steps:
+  console.log(`
+🎉 ${chalk.bold("Your example project is ready!")} 🎉
+
+Follow the instructions and learn more about the example here:
+
+    ${config.examples.repoUrl}/tree/main/${args.example}#readme
   `);
 }
 
@@ -96,9 +141,22 @@ Visit the following URL to learn more about the integration process:
 
 /* --- Run --- */
 
-const packageJsonFilePath = path.join(process.cwd(), "package.json");
-const hasPackageJson = fs.existsSync(packageJsonFilePath);
-const runFunc = hasPackageJson ? integrateStackbit : cloneStarter;
-await runFunc();
+async function doCreate() {
+  // If the current directory has a package.json file, we assume we're in an
+  // active project, and will not create a  new project.
+  const packageJsonFilePath = path.join(process.cwd(), "package.json");
+  if (fs.existsSync(packageJsonFilePath)) return integrateStackbit();
+  // If both starter and example were specified, throw an error message.
+  if (args.starter && args.example) {
+    console.error("[ERROR] Cannot specify a starter and an example.");
+    process.exit(1);
+  }
+  // Start from an example if specified.
+  if (args.example) return cloneExample();
+  // Otherwise, use a starter, which falls back to the default if not set.
+  return cloneStarter();
+}
+
+await doCreate();
 
 rl.close();

@@ -9,7 +9,13 @@ const starters = [
   },
 ];
 
+const examples = {
+  repoUrl: "https://github.com/stackbit-themes/stackbit-examples",
+  directories: ["algolia-search", "dynamic-app", "sb-countdown", "sb-typist"],
+};
+
 export default {
   defaults: { dirName: "my-stackbit-site", starter: starters[0] },
+  examples,
   starters,
 };
