@@ -26,12 +26,12 @@ function prompt(question, defaultAnswer) {
   });
 }
 
-async function installDependencies() {
+async function installDependencies(dirName) {
   console.log(`Installing dependencies ...`);
   await run(`cd ${dirName} && npm install`);
 }
 
-async function initGit() {
+async function initGit(dirName) {
   console.log(`Setting up Git ...`);
   await run(`rm -rf ${dirName}/.git`);
   await run(
@@ -64,19 +64,20 @@ const starter = config.starters.find(
 // Current time in seconds.
 const timestamp = Math.round(new Date().getTime() / 1000);
 
-const dirName = args._[0] ?? `${config.defaults.dirName}-${timestamp}`;
-
 /* --- New Project from Starter --- */
 
 async function cloneStarter() {
+  // Set references
+  const dirName = args._[0] ?? `${config.defaults.dirName}-${timestamp}`;
+
   // Clone repo
   const cloneCommand = `git clone --depth=1 ${starter.repoUrl} ${dirName}`;
   console.log(`\nCreating new project in ${dirName} ...`);
   await run(cloneCommand);
 
   // Project Setup
-  await installDependencies();
-  await initGit();
+  await installDependencies(dirName);
+  await initGit(dirName);
 
   // Output next steps:
   console.log(`
@@ -91,7 +92,8 @@ Follow the instructions for getting Started here:
 /* --- New Project from Example --- */
 
 async function cloneExample() {
-  const tmpDir = `examples-sparse-${timestamp}`;
+  const dirName = args._[0] ?? `${args.example}-${timestamp}`;
+  const tmpDir = `__tmp${timestamp}__`;
   console.log(`\nCreating new project in ${dirName} ...`);
 
   try {
@@ -107,8 +109,8 @@ async function cloneExample() {
     await run(`rm -rf ${tmpDir}`);
 
     // Project Setup
-    await installDependencies();
-    await initGit();
+    await installDependencies(dirName);
+    await initGit(dirName);
   } catch (err) {
     console.error(err);
     if (fs.existsSync(dirName)) await run(`rm -rf ${dirName}`);
