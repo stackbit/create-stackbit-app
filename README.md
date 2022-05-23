@@ -33,7 +33,7 @@ npx create-stackbit-app --starter ts-nextjs
 
 If no starter option is provided, [the default starter](https://github.com/stackbit-themes/nextjs-starter) is used.
 
-### Starting from an Example
+### Starting from an Example (🧪 Experimental)
 
 Use the `--example` option to start a project from an example. Run the command with the `--help` flag to see a full list of available starters.
 
@@ -42,6 +42,8 @@ npx create-stackbit-app --example algolia-search
 ```
 
 This will create a new project matching the name of the example, unless overridden (see below). [See here for a full list of starters](https://github.com/stackbit-themes/stackbit-examples).
+
+_Note: This is an experimental feature. Please [report issues](https://github.com/stackbit/create-stackbit-app/issues/new)._
 
 ### Setting Project Directory
 

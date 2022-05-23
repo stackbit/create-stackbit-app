@@ -133,7 +133,10 @@ async function cloneExample() {
   if (!gitVersionMatch || !gitVersionMatch[0]) {
     console.error(
       `Cannot determine git version, which is required for starting from an example.`,
-      `\nPlease report this to ${chalk.underline("support@stackbit.com")}.`
+      `\nPlease report this:`,
+      chalk.underline(
+        "https://github.com/stackbit/create-stackbit-app/issues/new"
+      )
     );
     process.exit(1);
   }
