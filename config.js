@@ -16,6 +16,7 @@ const examples = {
 
 export default {
   defaults: { dirName: "my-stackbit-site", starter: starters[0] },
+  minGitVersion: "2.25.0",
   examples,
   starters,
 };

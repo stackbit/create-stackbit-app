@@ -140,10 +140,9 @@ async function cloneExample() {
     );
     process.exit(1);
   }
-  const minGitVersion = "2.25.0";
-  if (compareVersion(gitVersionMatch[0], minGitVersion) < 0) {
+  if (compareVersion(gitVersionMatch[0], config.minGitVersion) < 0) {
     console.error(
-      `Starting from an example requires git version ${minGitVersion} or later.`,
+      `Starting from an example requires git version ${config.minGitVersion} or later.`,
       "Please upgrade"
     );
     process.exit(1);
