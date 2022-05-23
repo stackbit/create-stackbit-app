@@ -1,6 +1,6 @@
 {
   "name": "create-stackbit-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a new Stackbit site, or add Stackbit to an existing site.",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,6 @@
   "type": "module",
   "dependencies": {
     "chalk": "^5.0.0",
-    "nanoid": "^3.3.4",
     "yargs": "^17.3.1"
   }
 }
