@@ -45,6 +45,36 @@ async function initGit(dirName) {
   );
 }
 
+/**
+ * Given a version string, compare it to a control version. Returns:
+ *
+ *  -1: version is less than (older) than control
+ *   0: version and control are identical
+ *   1: version is greater than (newer) than control
+ *
+ * @param {string} version Version string that is being compared
+ * @param {string} control Version that is being compared against
+ */
+function compareVersion(version, control) {
+  // References
+  let returnValue = 0;
+  // Return 0 if the versions match.
+  if (version === control) return returnValue;
+  // Break the versions into arrays of integers.
+  const getVersionParts = (str) => str.split(".").map((v) => parseInt(v));
+  const versionParts = getVersionParts(version);
+  const controlParts = getVersionParts(control);
+  // Loop and compare each item.
+  controlParts.every((controlPart, idx) => {
+    // If the versions are equal at this part, we move on to the next part.
+    if (versionParts[idx] === controlPart) return true;
+    // Otherwise, set the return value, then break out of the loop.
+    returnValue = versionParts[idx] > controlPart ? 1 : -1;
+    return false;
+  });
+  return returnValue;
+}
+
 /* --- Parse CLI Arguments */
 
 const args = yargs(hideBin(process.argv))
@@ -98,6 +128,24 @@ Follow the instructions for getting Started here:
 /* --- New Project from Example --- */
 
 async function cloneExample() {
+  const gitResult = await run("git --version");
+  const gitVersionMatch = gitResult.stdout.match(/\d+\.\d+\.\d+/);
+  if (!gitVersionMatch || !gitVersionMatch[0]) {
+    console.error(
+      `Cannot determine git version, which is required for starting from an example.`,
+      `\nPlease report this to ${chalk.underline("support@stackbit.com")}.`
+    );
+    process.exit(1);
+  }
+  const minGitVersion = "2.25.0";
+  if (compareVersion(gitVersionMatch[0], minGitVersion) < 0) {
+    console.error(
+      `Starting from an example requires git version ${minGitVersion} or later.`,
+      "Please upgrade"
+    );
+    process.exit(1);
+  }
+
   const dirName = getDirName(args.example);
   const tmpDir = `__tmp${timestamp}__`;
   console.log(`\nCreating new project in ${dirName} ...`);
