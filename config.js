@@ -17,6 +17,7 @@ const examples = {
   repoUrl: "https://github.com/stackbit-themes/stackbit-examples",
   directories: [
     "algolia-search",
+    "chakra-next",
     "dynamic-app",
     "sb-countdown",
     "sb-typist",

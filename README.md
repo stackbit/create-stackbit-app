@@ -19,7 +19,7 @@ Options:
       --version  Show version number                                   [boolean]
   -s, --starter  Choose a starter [choices: "nextjs", "ts-nextjs", "contentful"]
   -e, --example  Start from an example
-  [choices: "algolia-search", "dynamic-app", "sb-countdown", "sb-typist", "tutor
+  [choices: "algolia-search", "chakra-next", "dynamic-app", "sb-countdown", "sb-typist", "tutor
                                                                 ial-contentful"]
       --help     Show help                                             [boolean]
 ```
