@@ -1,6 +1,6 @@
 {
   "name": "create-stackbit-app",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Create a new Stackbit site, or add Stackbit to an existing site.",
   "main": "index.js",
   "scripts": {
