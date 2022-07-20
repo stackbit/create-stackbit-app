@@ -17,10 +17,12 @@ To see a full list of options use the `--help` flag:
 
 Options:
       --version  Show version number                                   [boolean]
-  -s, --starter  Choose a starter [choices: "nextjs", "ts-nextjs", "contentful"]
+  -s, --starter  Choose a starter
+  [choices: "nextjs", "ts-nextjs", "contentful", "full-nextjs", "small-biz-nextj
+                                                          s", "personal-nextjs"]
   -e, --example  Start from an example
-  [choices: "algolia-search", "chakra-next", "dynamic-app", "sb-countdown", "sb-typist", "tutor
-                                                                ial-contentful"]
+  [choices: "algolia-search", "chakra-next", "dynamic-app", "sb-countdown", "sb-
+                                                 typist", "tutorial-contentful"]
       --help     Show help                                             [boolean]
 ```
 
