@@ -11,6 +11,18 @@ const starters = [
     name: "contentful",
     repoUrl: "https://github.com/stackbit-themes/contentful-starter",
   },
+  {
+    name: "full-nextjs",
+    repoUrl: "https://github.com/stackbit-themes/starter-nextjs-theme",
+  },
+  {
+    name: "small-biz-nextjs",
+    repoUrl: "https://github.com/stackbit-themes/small-business-nextjs-theme",
+  },
+  {
+    name: "personal-nextjs",
+    repoUrl: "https://github.com/stackbit-themes/personal-nextjs-theme",
+  },
 ];
 
 const examples = {
