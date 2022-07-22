@@ -31,8 +31,6 @@ const examples = {
     "algolia-search",
     "chakra-next",
     "dynamic-app",
-    "sb-countdown",
-    "sb-typist",
     "tutorial-contentful",
   ],
 };
