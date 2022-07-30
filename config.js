@@ -32,6 +32,7 @@ const examples = {
     "chakra-next",
     "dynamic-app",
     "tutorial-contentful",
+    "hydrogen-contentful-demo-store",
   ],
 };
 
