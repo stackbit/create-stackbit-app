@@ -34,6 +34,7 @@ const examples = {
     "sb-countdown",
     "sb-typist",
     "tutorial-contentful",
+    "hydrogen-contentful-demo-store",
   ],
 };
 
