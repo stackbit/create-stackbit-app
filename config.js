@@ -29,10 +29,14 @@ const examples = {
   repoUrl: "https://github.com/stackbit-themes/stackbit-examples",
   directories: [
     "algolia-search",
-    "chakra-next",
-    "dynamic-app",
-    "tutorial-contentful",
+    "angular-contentful",
+    "chakra-ui",
+    "cloudinary-contentful",
     "hydrogen-contentful-demo-store",
+    "ninetailed-personalization",
+    "onboarding-webapp",
+    "sveltekit-contentful",
+    "tutorial-contentful",
   ],
 };
 
