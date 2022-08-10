@@ -37,6 +37,8 @@ const examples = {
     "onboarding-webapp",
     "sveltekit-contentful",
     "tutorial-contentful",
+    "tutorial-nextjs-contentful",
+    "tutorial-nextjs-files",
   ],
 };
 
