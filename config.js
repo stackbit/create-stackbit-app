@@ -36,7 +36,6 @@ const examples = {
     "ninetailed-personalization",
     "onboarding-webapp",
     "sveltekit-contentful",
-    "tutorial-contentful",
     "tutorial-nextjs-contentful",
     "tutorial-nextjs-files",
   ],
