@@ -166,8 +166,8 @@ async function cloneExample() {
     // Delete the clone.
     await fs.removeSync(tmpDir)
 
-    await installDependencies(dirName)
     // Project Setup
+    await installDependencies(dirName)
     await initGit(dirName)
   } catch (err) {
     if (fs.existsSync(dirName)) await fs.remove(dirName)
