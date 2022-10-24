@@ -172,7 +172,7 @@ async function cloneExample() {
   } catch (err) {
     if (fs.existsSync(dirName)) await fs.remove(dirName)
     if (fs.existsSync(tmpDir))
-     // remove temp directory
+      // remove temp directory
       await fs.remove(tmpDir, (err) => {
         if (err) {
           console.log(err)
