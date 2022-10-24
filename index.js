@@ -39,11 +39,11 @@ async function installDependencies(dirName) {
 
 async function initGit(dirName) {
   console.log(`Setting up Git ...`)
-  await fs.remove(`${dirName} / .git`, { recursive: true }, async () => {
-    await run(
-      `cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`
-    )
-  })
+  // remove .git folder
+  await fs.removeSync(`${dirName} / .git`)
+  await run(
+    `cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`
+  )
 }
 /**
  * Given a version string, compare it to a control version. Returns:
@@ -160,29 +160,19 @@ async function cloneExample() {
     // Checkout just the example dir.
     await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`)
 
-    // Copy out into a new directory within current working directory.
-    await fs.copy(`${tmpDir}/${args.example}`, dirName, async (err) => {
-      if (err) {
-        console.log(err)
-      }
-    })
+    // move out into a new directory.
+    await fs.moveSync(`${tmpDir}/${args.example}`, dirName)
 
     // Delete the clone.
-    await fs.remove(tmpDir, { recursive: true }, (err) => {
-      if (err) {
-        console.log(err)
-      }
-    })
+    await fs.removeSync(tmpDir)
 
-    if (fs.existsSync(path.join(process.cwd(), dirName)))
-      await installDependencies(path.join(process.cwd(), dirName))
+    await installDependencies(dirName)
     // Project Setup
-    // await
-    // await initGit(prestineFolder)
+    await initGit(dirName)
   } catch (err) {
-
     if (fs.existsSync(dirName)) await fs.remove(dirName)
     if (fs.existsSync(tmpDir))
+     // remove temp directory
       await fs.remove(tmpDir, (err) => {
         if (err) {
           console.log(err)
