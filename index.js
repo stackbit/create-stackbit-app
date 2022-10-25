@@ -39,8 +39,7 @@ async function installDependencies(dirName) {
 
 async function initGit(dirName) {
   console.log(`Setting up Git ...`);
-  // remove .git folder
-  await fs.removeSync(`${dirName} / .git`);
+  await fs.removeSync(`${dirName}/.git`);
   await run(`cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`);
 }
 /**
@@ -148,10 +147,8 @@ async function cloneExample() {
     await run(`git clone --depth 1 --filter=blob:none --sparse ${config.examples.repoUrl} ${tmpDir}`);
     // Checkout just the example dir.
     await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`);
-
     // move out into a new directory.
     await fs.moveSync(`${tmpDir}/${args.example}`, dirName);
-
     // Delete the clone.
     await fs.removeSync(tmpDir);
 
@@ -159,14 +156,9 @@ async function cloneExample() {
     await installDependencies(dirName);
     await initGit(dirName);
   } catch (err) {
-    if (fs.existsSync(dirName)) await fs.remove(dirName);
-    if (fs.existsSync(tmpDir))
-      // remove temp directory
-      await fs.remove(tmpDir, (err) => {
-        if (err) {
-          console.log(err);
-        }
-      });
+    console.error(err);
+    if (fs.existsSync(dirName)) await fs.removeSync(dirName);
+    if (fs.existsSync(tmpDir)) await fs.removeSync(tmpDir);
     process.exit(1);
   }
 
