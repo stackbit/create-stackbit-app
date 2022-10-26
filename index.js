@@ -2,7 +2,7 @@
 
 import chalk from 'chalk';
 import { exec } from 'child_process';
-import fs from 'fs';
+import fs from 'fs-extra';
 import path from 'path';
 import readline from 'readline';
 import util from 'util';
@@ -39,10 +39,9 @@ async function installDependencies(dirName) {
 
 async function initGit(dirName) {
   console.log(`Setting up Git ...`);
-  await run(`rm -rf ${dirName}/.git`);
+  fs.removeSync(`${dirName}/.git`);
   await run(`cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`);
 }
-
 /**
  * Given a version string, compare it to a control version. Returns:
  *
@@ -148,18 +147,18 @@ async function cloneExample() {
     await run(`git clone --depth 1 --filter=blob:none --sparse ${config.examples.repoUrl} ${tmpDir}`);
     // Checkout just the example dir.
     await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`);
-    // Copy out into a new directory within current working directory.
-    await run(`cp -R ${tmpDir}/${args.example} ${dirName}`);
+    // move out into a new directory.
+    fs.moveSync(`${tmpDir}/${args.example}`, dirName);
     // Delete the clone.
-    await run(`rm -rf ${tmpDir}`);
+    fs.removeSync(tmpDir);
 
     // Project Setup
     await installDependencies(dirName);
     await initGit(dirName);
   } catch (err) {
     console.error(err);
-    if (fs.existsSync(dirName)) await run(`rm -rf ${dirName}`);
-    if (fs.existsSync(tmpDir)) await run(`rm -rf ${tmpDir}`);
+    if (fs.existsSync(dirName)) fs.removeSync(dirName);
+    if (fs.existsSync(tmpDir)) fs.removeSync(tmpDir);
     process.exit(1);
   }
 
