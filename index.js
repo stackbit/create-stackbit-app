@@ -39,7 +39,7 @@ async function installDependencies(dirName) {
 
 async function initGit(dirName) {
   console.log(`Setting up Git ...`);
-  await fs.removeSync(`${dirName}/.git`);
+  fs.removeSync(`${dirName}/.git`);
   await run(`cd ${dirName} && git init && git add . && git commit -m "New Stackbit project"`);
 }
 /**
@@ -148,17 +148,17 @@ async function cloneExample() {
     // Checkout just the example dir.
     await run(`cd ${tmpDir} && git sparse-checkout set ${args.example}`);
     // move out into a new directory.
-    await fs.moveSync(`${tmpDir}/${args.example}`, dirName);
+    fs.moveSync(`${tmpDir}/${args.example}`, dirName);
     // Delete the clone.
-    await fs.removeSync(tmpDir);
+    fs.removeSync(tmpDir);
 
     // Project Setup
     await installDependencies(dirName);
     await initGit(dirName);
   } catch (err) {
     console.error(err);
-    if (fs.existsSync(dirName)) await fs.removeSync(dirName);
-    if (fs.existsSync(tmpDir)) await fs.removeSync(tmpDir);
+    if (fs.existsSync(dirName)) fs.removeSync(dirName);
+    if (fs.existsSync(tmpDir)) fs.removeSync(tmpDir);
     process.exit(1);
   }
 
