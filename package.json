@@ -15,6 +15,7 @@
   "type": "module",
   "dependencies": {
     "chalk": "^5.0.0",
+    "fs-extra": "^10.1.0",
     "yargs": "^17.3.1"
   }
 }
