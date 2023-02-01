@@ -28,6 +28,7 @@ const starters = [
 const examples = {
   repoUrl: 'https://github.com/stackbit-themes/stackbit-examples',
   directories: [
+    'airtable-content-source',
     'algolia-search',
     'angular-contentful',
     'chakra-ui',
