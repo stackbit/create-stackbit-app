@@ -34,6 +34,7 @@ const examples = {
     'chakra-ui',
     'cloudinary-contentful',
     'contentlayer',
+    'documentation',
     'hydrogen-contentful-demo-store',
     'ninetailed-personalization',
     'onboarding-webapp',
