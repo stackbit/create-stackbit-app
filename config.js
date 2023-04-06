@@ -37,6 +37,7 @@ const examples = {
     'documentation',
     'gatsby-contentful',
     'hydrogen-contentful-demo-store',
+    'i18n-nextjs-contentful',
     'ninetailed-personalization',
     'onboarding-webapp',
     'sveltekit-contentful',
