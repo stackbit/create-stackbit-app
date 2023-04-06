@@ -9,7 +9,7 @@ const starters = [
   },
   {
     name: 'contentful',
-    repoUrl: 'https://github.com/stackbit-themes/contentful-starter',
+    repoUrl: 'https://github.com/stackbit-themes/nextjs-contentful-starter',
   },
   {
     name: 'full-nextjs',
