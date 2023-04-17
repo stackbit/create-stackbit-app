@@ -11,18 +11,6 @@ const starters = [
     name: 'contentful',
     repoUrl: 'https://github.com/stackbit-themes/nextjs-contentful-starter',
   },
-  {
-    name: 'full-nextjs',
-    repoUrl: 'https://github.com/stackbit-themes/starter-nextjs-theme',
-  },
-  {
-    name: 'small-biz-nextjs',
-    repoUrl: 'https://github.com/stackbit-themes/small-business-nextjs-theme',
-  },
-  {
-    name: 'personal-nextjs',
-    repoUrl: 'https://github.com/stackbit-themes/personal-nextjs-theme',
-  },
 ];
 
 const examples = {
@@ -31,14 +19,17 @@ const examples = {
     'airtable-content-source',
     'algolia-search',
     'angular-contentful',
+    'auto-annotated-portfolio',
     'chakra-ui',
     'cloudinary-contentful',
+    'cloudinary-unpic',
     'contentlayer',
     'documentation',
     'gatsby-contentful',
     'hydrogen-contentful-demo-store',
     'i18n-nextjs-contentful',
     'ninetailed-personalization',
+    'nuxt3-preview',
     'onboarding-webapp',
     'sveltekit-contentful',
     'tutorial-gatsby-contentful',
