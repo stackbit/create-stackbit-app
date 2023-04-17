@@ -19,7 +19,7 @@ const examples = {
     'airtable-content-source',
     'algolia-search',
     'angular-contentful',
-    'auto-annotated-portfolio,
+    'auto-annotated-portfolio',
     'chakra-ui',
     'cloudinary-contentful',
     'cloudinary-unpic',
