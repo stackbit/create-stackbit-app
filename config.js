@@ -37,6 +37,7 @@ const examples = {
     'tutorial-html-json',
     'tutorial-nextjs-contentful',
     'tutorial-nextjs-files',
+    'unsplash-asset-source',
   ],
 };
 
