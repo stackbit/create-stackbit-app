@@ -1,7 +1,7 @@
 const starters = [
   {
     name: 'nextjs',
-    repoUrl: 'https://github.com/stackbit-themes/nextjs-starter',
+    repoUrl: 'https://github.com/stackbit-themes/nextjs-markdown-starter',
   },
   {
     name: 'ts-nextjs',
